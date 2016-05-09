@@ -49,7 +49,7 @@ std::string redir_to_string(Redirection redir){
     return std::string();
 }
 
-void SingleCommand::print(){
+void SingleCommand::print() const {
     printf("SingleCommand: (%s, ", executable.c_str());
     for( auto argument : arguments ){
         printf("%s, ", argument.c_str());
@@ -71,7 +71,7 @@ void OneLineCommand::add_single_command(SingleCommand cmd){
     cmd_count++;
 }
 
-std::string OneLineCommand::fetch_word(std::string& input_string){
+std::string OneLineCommand::fetch_word(std::string& input_string) const {
     /* 
      * fetch the first "word" in input_string, and input_string is splited to (word, rest).
      * return word and assign input_string = rest.

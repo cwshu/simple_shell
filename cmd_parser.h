@@ -38,7 +38,7 @@ struct SingleCommand{
     void add_redir(int fileno, Redirection redir);
 
 // DEBUG
-    void print();
+    void print() const;
 };
 
 struct OneLineCommand{
@@ -53,6 +53,6 @@ struct OneLineCommand{
     void parse_redir_file(SingleCommand& cmd, std::string& file_redir_command);
     int parse_single_command(SingleCommand& cmd, std::string& single_command);
 
-    std::string fetch_word(std::string& input_string);
+    std::string fetch_word(std::string& input_string) const;
 };
 
