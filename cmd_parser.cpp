@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 
 #include <unistd.h>
 
@@ -16,7 +17,7 @@ SingleCommand::SingleCommand(){
 
 void SingleCommand::add_executable(std::string executable){
     this->executable = executable;
-    this->args_count = 1;
+    this->args_count = 0;
 }
 
 void SingleCommand::add_argv(std::string argument){
@@ -34,6 +35,21 @@ void SingleCommand::add_redir(int fileno, Redirection redir){
     else if( fileno == STDERR_FILENO ){
         this->std_error = redir;
     }
+}
+
+char** SingleCommand::gen_argv(){
+    char** argv;
+    argv = new char* [args_count+2];
+
+    argv[0] = new char [executable.length()+1];
+    strncpy(argv[0], executable.c_str(), executable.length()); // 0
+    for( int i=0; i<args_count; i++ ){ // 1 ~ args_count
+        argv[i+1] = new char [arguments[i].length()+1];
+        strncpy(argv[i+1], arguments[i].c_str(), arguments[i].length()+1);
+    }
+    argv[args_count+1] = NULL; // args_count+1
+
+    return argv;
 }
 
 std::string redir_to_string(Redirection redir){

@@ -37,6 +37,8 @@ struct SingleCommand{
     void add_argv(std::string argument);
     void add_redir(int fileno, Redirection redir);
 
+    char** gen_argv();
+
 // DEBUG
     void print() const;
 };
